@@ -1,0 +1,196 @@
+DOCTYPE html>
+<html>
+<head>
+<title>My Valentine 💖</title>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: #ffd6e8; /* Light Pink */
+    font-family: 'Comic Sans MS', cursive;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    color: #d6336c;
+}
+
+.container {
+    position: relative;
+    z-index: 5;
+    width: 80%;
+}
+
+h1 {
+    font-size: 55px;
+    color: #ff1e63;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px #ff8fab; }
+    to { text-shadow: 0 0 25px #ff1e63; }
+}
+
+#text {
+    font-size: 30px;
+    margin-top: 20px;
+    min-height: 80px;
+    transition: opacity 1s;
+}
+
+button {
+    padding: 12px 30px;
+    font-size: 22px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 15px;
+    transition: 0.3s;
+}
+
+#yesBtn {
+    background-color: #ff4d88;
+    color: white;
+}
+
+#noBtn {
+    background-color: white;
+    color: #ff4d88;
+    position: relative;
+}
+
+button:hover {
+    transform: scale(1.15);
+}
+
+/* Floating Animation */
+.floating {
+    position: absolute;
+    animation: float 8s linear infinite;
+    opacity: 0.9;
+    z-index: 1;
+}
+
+@keyframes float {
+    from { transform: translateY(100vh); }
+    to { transform: translateY(-10vh); }
+}
+
+.teddy {
+    position: absolute;
+    font-size: 45px;
+    animation: bounce 3s infinite;
+    z-index: 1;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>My Valentine 💕</h1>
+    <div id="text"></div>
+    <div id="buttons" style="display:none;">
+        <button id="yesBtn">YES 💖</button>
+        <button id="noBtn">NO 🙈</button>
+    </div>
+</div>
+
+<script>
+
+const script = [
+"Hi bandru 😜",
+"*hehehehe* 😂",
+"Okay okay serious now...",
+"Hi Udayy💖",
+"You make my world beautiful 🌸",
+"You are my biggest smile 😊",
+"My happiness, my comfort 🧸",
+"My favourite person forever 💕",
+"And today I want to ask you something..."
+];
+
+let i = 0;
+const textDiv = document.getElementById("text");
+
+function showNext() {
+    if (i < script.length) {
+        textDiv.style.opacity = 0;
+        setTimeout(() => {
+            textDiv.innerHTML = script[i];
+            textDiv.style.opacity = 1;
+            i++;
+        }, 500);
+        setTimeout(showNext, 3000);
+    } else {
+        showProposal();
+    }
+}
+
+function showProposal() {
+    textDiv.innerHTML = "Will you be my Valentine? 💍💖";
+    document.getElementById("buttons").style.display = "block";
+}
+
+showNext();
+
+// YES button
+document.getElementById("yesBtn").onclick = function() {
+    document.body.innerHTML = `
+    <div style="display:flex;justify-content:center;align-items:center;height:100vh;flex-direction:column;color:#d6336c;text-align:center;background:#ffd6e8;">
+        <h1 style="font-size:60px;">YAYYYYY 💖💖💖</h1>
+        <h2>You are Mine Forever Udayy 🥰🧸</h2>
+        <div style="font-size:80px;">🧸💖🌹🌸💖🧸</div>
+    </div>
+    `;
+};
+
+// NO button runs away
+const noBtn = document.getElementById("noBtn");
+noBtn.onmouseover = function() {
+    noBtn.style.position = "absolute";
+    noBtn.style.top = Math.random() * window.innerHeight + "px";
+    noBtn.style.left = Math.random() * window.innerWidth + "px";
+};
+
+// Floating Hearts, Flowers, Roses
+function createFloating(symbol) {
+    const item = document.createElement("div");
+    item.classList.add("floating");
+    item.innerHTML = symbol;
+    item.style.left = Math.random() * 100 + "vw";
+    item.style.fontSize = Math.random() * 20 + 25 + "px";
+    document.body.appendChild(item);
+
+    setTimeout(() => { item.remove(); }, 8000);
+}
+
+setInterval(() => createFloating("💖"), 400);
+setInterval(() => createFloating("🌸"), 900);
+setInterval(() => createFloating("🌹"), 1200);
+
+// Teddy Bears
+function createTeddy() {
+    const teddy = document.createElement("div");
+    teddy.classList.add("teddy");
+    teddy.innerHTML = "🧸";
+    teddy.style.left = Math.random() * 90 + "vw";
+    teddy.style.top = Math.random() * 80 + "vh";
+    document.body.appendChild(teddy);
+    setTimeout(() => { teddy.remove(); }, 5000);
+}
+setInterval(createTeddy, 2500);
+
+</script>
+
+</body>
+</html>
